@@ -10,8 +10,8 @@ setup(name='control face',
       packages=find_packages(),
       include_package_data=True,
       dependency_links = [
-          "http://github.com/dsociative/ztest/tarball/master#egg=ztest",
-          "http://github.com/dsociative/class_collector/tarball/master#egg=class_collector"
+          "http://github.com/dsociative/ztest/tarball/master#egg=ztest-0.0.0",
+          "http://github.com/dsociative/class_collector/tarball/master#egg=class_collector-0.0.0"
       ],
       install_requires=['flask', 'Flask-WTF', 'blinker',
                         'jinja2-highlight',
