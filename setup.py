@@ -15,5 +15,5 @@ setup(name='control face',
       ],
       install_requires=['flask', 'Flask-WTF', 'blinker',
                         'jinja2-highlight',
-                        'ztest']
+                        'ztest', 'class_collector']
      )
