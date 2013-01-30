@@ -1,12 +1,12 @@
 # -*- coding: utf8 -*-
 from contextlib import contextmanager
-from flask import template_rendered, request
+from flask import template_rendered
 from wtforms import TextField
 from class_collector import ClassCollector
 
 from control_face.command import ControlCommand
-from control_face.main import app
 from control_face.tests.base_test import BaseTest
+from control_face.tests.base_test import test_app as app
 
 
 @contextmanager

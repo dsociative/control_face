@@ -8,6 +8,7 @@ setup(name='control face',
       author='dsociative',
       author_email='admin@geektech.ru',
       packages=find_packages('control_face'),
+      include_package_data=True,
       dependency_links = [
           "http://github.com/dsociative/ztest/tarball/master#egg=ztest",
           "http://github.com/dsociative/class_collector/tarball/master#egg=class_collector"

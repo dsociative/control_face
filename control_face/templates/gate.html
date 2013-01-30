@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form class="form-horizontal" method="POST" action="{{ url_for('command', command_name=command.name) }}">
+    <form class="form-horizontal" method="POST" action="{{ url_for('.command', command_name=command.name) }}">
         {% for field in command.form %}
             <div class="control-group{% if field.errors %} error{% endif %}">
                 <label class="control-label" for="input{{ field.name }}">{{ field.label }}</label>
