@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-from datetime import datetime
+from datetime import datetime, date
 from flask.helpers import json
 from werkzeug.datastructures import MultiDict
 from control_face.tests.base_test import BaseTest
@@ -30,4 +30,10 @@ class TestGateCommand(BaseTest):
         data = {'d': datetime.now()}
         self.command.set_result(data)
         self.eq(self.command.pretty(),
-                '{\n    "d": "%s"\n}' % data['d'].isoformat(' '))
+                '{\n    "d": "%s"\n}' % data['d'].isoformat())
+
+    def test_pretty_date(self):
+        data = {'d': date.today()}
+        self.command.set_result(data)
+        self.eq(self.command.pretty(),
+                '{\n    "d": "%s"\n}' % data['d'].isoformat())
