@@ -1,4 +1,5 @@
 # -*- coding: utf8 -*-
+from datetime import datetime
 from flask.helpers import json
 from werkzeug.datastructures import MultiDict
 from control_face.tests.base_test import BaseTest
@@ -24,3 +25,9 @@ class TestGateCommand(BaseTest):
         self.eq(self.command.pretty(),
                 json.dumps(data, sort_keys=True, indent=4,
                            separators=(',', ': ')))
+
+    def test_pretty_datetime(self):
+        data = {'d': datetime.now()}
+        self.command.set_result(data)
+        self.eq(self.command.pretty(),
+                '{\n    "d": "%s"\n}' % data['d'].isoformat(' '))

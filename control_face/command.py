@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 from flask.helpers import json
 from wtforms import Form
+from control_face.json_encoder import ControlJSONEncoder
 
 
 class ControlCommand(object):
@@ -23,5 +24,5 @@ class ControlCommand(object):
 
     def pretty(self):
         return json.dumps(self.result, sort_keys=True, indent=4,
-                          separators=(',', ': '))
+                          separators=(',', ': '), cls=ControlJSONEncoder)
 
