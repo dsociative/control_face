@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form class="form-horizontal" method="POST" action="{{ url_for('command', command_name=command.name) }}">
+        {% for field in command.form %}
+            <div class="control-group{% if field.errors %} error{% endif %}">
+                <label class="control-label" for="input{{ field.name }}">{{ field.label }}</label>
+                <div class="controls">
+                    {{ field }}
+                    <span class="help-inline">{{ ' '.join(field.errors) }}</span>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" class="btn btn-primary" value="Execute">
+            </div>
+        </div>
+    </form>
+{% highlight 'json' %}{{ command.pretty() }}{% endhighlight %}
+{% endblock %}
