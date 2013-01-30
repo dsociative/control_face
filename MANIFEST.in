@@ -1,0 +1,2 @@
+recursive-include control_face/templates *
+recursive-include control_face/static *
