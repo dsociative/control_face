@@ -6,7 +6,7 @@ from werkzeug.utils import redirect
 from control_face.tests.test_env import test_config
 
 
-class MyFlask(Flask):
+class ControlApp(Flask):
     jinja_options = dict(Flask.jinja_options)
     jinja_options.setdefault('extensions',
         []).append('jinja2_highlight.HighlightExtension')
@@ -39,7 +39,7 @@ def list_command():
 
 
 def create_app(config):
-    app = MyFlask(__name__)
+    app = ControlApp(__name__)
     app.register_blueprint(control_app)
     app.config.from_object(config)
     return app
