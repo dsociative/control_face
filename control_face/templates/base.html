@@ -22,7 +22,7 @@
                 <li class="nav-header">Commands</li>
                 {% for name in config['MAPPER'] %}
                     <li{% if name == command.name %} class="active"{% endif %}>
-                        <a href="{{ url_for('.command', command_name=name) }}">{{ name }}</a>
+                        <a href="{{ url_for('.command', name=name) }}">{{ name }}</a>
                     </li>
                 {% endfor %}
             </ul>

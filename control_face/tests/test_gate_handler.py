@@ -12,8 +12,10 @@ from control_face.tests.base_test import test_app as app
 @contextmanager
 def captured_templates(app):
     recorded = []
+
     def record(sender, template, context, **extra):
         recorded.append((template, context))
+
     template_rendered.connect(record, app)
     try:
         yield recorded
@@ -22,7 +24,6 @@ def captured_templates(app):
 
 
 class TestGateHandler(BaseTest):
-
     def setUp(self):
         self.client = app.test_client()
         self.mapper = ClassCollector('control_face/tests/test_env',
@@ -41,6 +42,10 @@ class TestGateHandler(BaseTest):
     def test_index(self):
         rv = self.client.get('/')
         self.eq(rv.location, 'http://localhost/command.do')
+
+    def test_command_not_found(self):
+        rv = self.client.get('/unknown_command')
+        self.isin('404 Not Found', rv.data)
 
     def test_command_do_form(self):
         with captured_templates(app) as templates:

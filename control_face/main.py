@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 
 from flask import Flask, render_template, request, url_for, current_app, \
-    Blueprint
+    Blueprint, abort
 from werkzeug.utils import redirect
 from control_face.tests.test_env import test_config
 
@@ -19,13 +19,16 @@ def get_mapper():
     return current_app.config['MAPPER']
 
 
-def init_command(command_name):
-    return get_mapper()[command_name](request.form)
+def get_command(name):
+    return get_mapper().get(name)
 
 
-@control_app.route('/<command_name>',  methods=['GET', 'POST'])
-def command(command_name):
-    command = init_command(command_name)
+@control_app.route('/<name>',  methods=['GET', 'POST'])
+def command(name):
+    command_cls = get_command(name)
+    if not command_cls:
+        abort(404)
+    command = command_cls(request.form)
 
     if request.method == 'POST' and command.form.validate():
         command.execute()
@@ -35,7 +38,7 @@ def command(command_name):
 
 @control_app.route('/')
 def list_command():
-    return redirect(url_for('.command', command_name=get_mapper().keys()[0]))
+    return redirect(url_for('.command', name=get_mapper().keys()[0]))
 
 
 def create_app(config):
