@@ -22,8 +22,11 @@ class ControlCommand(object):
     def set_result(self, result):
         self.result = result
 
-    def pretty(self):
+    def dump(self):
         return json.dumps(self.result, sort_keys=True, indent=4,
                           separators=(',', ': '), cls=ControlJSONEncoder,
                           ensure_ascii=False)
+
+    def pretty(self):
+        return unicode(self.dump())
 

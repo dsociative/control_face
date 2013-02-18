@@ -43,3 +43,6 @@ class TestGateCommand(BaseTest):
         data = {'name': name}
         self.command.set_result(data)
         self.eq(self.command.pretty(), '{\n    "name": "%s"\n}' % name)
+
+    def test_pretty_unicode(self):
+        self.true(type(self.command.pretty()), unicode)
