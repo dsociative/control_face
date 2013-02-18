@@ -39,10 +39,10 @@ class TestGateCommand(BaseTest):
                 '{\n    "d": "%s"\n}' % data['d'].isoformat())
 
     def test_pretty_russian(self):
-        name = u'Иван'
-        data = {'name': name}
+        data = {'name': 'Иван'}
         self.command.set_result(data)
-        self.eq(self.command.pretty(), '{\n    "name": "%s"\n}' % name)
+        self.eq(self.command.pretty(),
+                unicode('{\n    "name": "Иван"\n}', 'utf8'))
 
     def test_pretty_unicode(self):
         self.true(type(self.command.pretty()), unicode)

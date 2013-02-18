@@ -28,5 +28,11 @@ class ControlCommand(object):
                           ensure_ascii=False)
 
     def pretty(self):
-        return unicode(self.dump())
+        return self.encode(self.dump())
+
+    def encode(self, data):
+        if type(data) is str:
+            return unicode(data, 'utf8')
+        else:
+            return data
 
