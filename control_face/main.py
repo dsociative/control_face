@@ -38,7 +38,7 @@ def command(name):
 
 @control_app.route('/')
 def list_command():
-    return redirect(url_for('.command', name=get_mapper().keys()[0]))
+    return redirect(url_for('.command', name=sorted(get_mapper().keys())[0]))
 
 
 def create_app(config):
