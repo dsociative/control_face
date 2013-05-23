@@ -15,8 +15,13 @@ class ControlApp(Flask):
 
 control_app = Blueprint('control_app', __name__, template_folder='templates')
 
+
 def get_mapper():
     return current_app.config['MAPPER']
+
+
+def get_command_names():
+    return current_app.config['COMMAND_NAMES']
 
 
 def get_command(name):
@@ -38,13 +43,14 @@ def command(name):
 
 @control_app.route('/')
 def list_command():
-    return redirect(url_for('.command', name=get_mapper().keys()[0]))
+    return redirect(url_for('.command', name=get_command_names()[0]))
 
 
 def create_app(config):
     app = ControlApp(__name__)
     app.register_blueprint(control_app)
     app.config.from_object(config)
+    app.config.setdefault('COMMAND_NAMES', sorted(app.config['MAPPER'].keys()))
     return app
 
 if __name__ == '__main__':
