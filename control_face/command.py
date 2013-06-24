@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-from flask.helpers import json
+from flask import json
 from wtforms import Form
 from control_face.json_encoder import ControlJSONEncoder
 
