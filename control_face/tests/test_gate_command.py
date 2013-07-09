@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 from datetime import datetime, date
-from flask.helpers import json
+from flask import json
 from werkzeug.datastructures import MultiDict
 from control_face.tests.base_test import BaseTest
 from control_face.tests.test_env.commands.command_something_else import CommandSomethingElse
