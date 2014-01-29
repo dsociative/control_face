@@ -7,3 +7,4 @@ from control_face.command import ControlCommand
 MAPPER = ClassCollector(path.join(path.dirname(__file__), 'commands'),
                         ControlCommand).mapper()
 PROJECT_NAME = 'Test'
+ROOT_URL = '/test'

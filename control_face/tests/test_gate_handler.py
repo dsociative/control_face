@@ -1,5 +1,7 @@
 # -*- coding: utf8 -*-
 from contextlib import contextmanager
+from control_face.main import create_app
+from control_face.tests.test_env.test_config import TestConfig
 from flask import template_rendered
 from wtforms import TextField
 from class_collector import ClassCollector
@@ -58,3 +60,25 @@ class TestGateHandler(BaseTest):
             self.client.post('/something.else', data={'what': 'whatever'})
             command = self.get_context(templates, 'command')
             self.eq(command.result, {'this': {'is': ['response', 'long']}})
+
+
+class ConfigWithChangedRoot(TestConfig):
+    def __init__(self):
+        super(ConfigWithChangedRoot, self).__init__()
+        self.root_url = '/testing/control'
+
+
+class TestChangedRoot(BaseTest):
+    def setUp(self):
+        app = create_app(ConfigWithChangedRoot())
+        print app.url_map
+        self.client = app.test_client()
+        self.mapper = ClassCollector('control_face/tests/test_env',
+                                     ControlCommand).mapper()
+        app.config['MAPPER'] = self.mapper
+        app.config['TESTING'] = True
+
+    def test_index(self):
+        rv = self.client.get('/testing/control')
+        print rv.data
+        self.eq(rv.location, 'http://localhost/testing/control/command.do')
